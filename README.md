@@ -15,7 +15,9 @@ A free, open-source alternative to Punto Switcher and Caramba Switcher for Mac (
 **Homebrew:**
 
 ```bash
-brew install --cask skriptoff/tap/ghbdtn
+brew tap skriptoff/tap
+brew trust --cask skriptoff/tap/ghbdtn   # Homebrew 7+ asks to trust third-party casks
+brew install --cask ghbdtn
 ```
 
 **Or download** `Ghbdtn-<version>.dmg` from [Releases](https://github.com/skriptoff/Ghbdtn/releases/latest)
@@ -108,7 +110,7 @@ MIT
 - Таблица строится из включённых в системе раскладок, буфер обмена восстанавливается.
 - В простое не нагружает систему: 0% CPU, ~20 МБ.
 
-**Установка:** `brew install --cask skriptoff/tap/ghbdtn` или скачайте `.dmg` из
+**Установка:** через Homebrew (команды выше, в разделе Install) или скачайте `.dmg` из
 [Releases](https://github.com/skriptoff/Ghbdtn/releases/latest) и перетащите Ghbdtn в «Программы».
 
 **Первый запуск.** Приложение пока не нотаризовано Apple, поэтому macOS в первый раз его
