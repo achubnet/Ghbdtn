@@ -3,7 +3,7 @@ import LayoutCore
 
 /// Bridges the Text Input Sources API to `KeyboardLayout` snapshots and layout switching.
 @MainActor
-final class InputSources {
+enum InputSources {
     struct Entry {
         let source: TISInputSource
         let layout: KeyboardLayout

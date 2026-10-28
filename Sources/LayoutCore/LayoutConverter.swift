@@ -8,11 +8,6 @@ public struct LayoutConverter: Sendable {
         toLatin = Self.buildMap(from: cyrillic, to: latin)
     }
 
-    public func convert(_ text: String, to target: Script) -> String {
-        let map = map(to: target)
-        return String(text.map { map[$0] ?? $0 })
-    }
-
     /// Flips every letter to the layout it was not typed in. Characters without a script
     /// (punctuation, digits) follow the letters of their word, then of the whole text, then
     /// `unknownScript`.

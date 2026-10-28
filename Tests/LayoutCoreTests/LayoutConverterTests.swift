@@ -37,28 +37,28 @@ enum Fixtures {
     let converter = Fixtures.converter
 
     @Test func convertsLatinTypedTextToCyrillic() {
-        #expect(converter.convert("ghbdtn rfr ltkf", to: .cyrillic) == "привет как дела")
+        #expect(converter.flip("ghbdtn rfr ltkf", unknownScript: .latin) == "привет как дела")
     }
 
     @Test func convertsCyrillicTypedTextToLatin() {
-        #expect(converter.convert("привет как дела", to: .latin) == "ghbdtn rfr ltkf")
+        #expect(converter.flip("привет как дела", unknownScript: .cyrillic) == "ghbdtn rfr ltkf")
     }
 
     @Test func preservesLetterCase() {
-        #expect(converter.convert("Ghbdtn", to: .cyrillic) == "Привет")
-        #expect(converter.convert("ПРИВЕТ", to: .latin) == "GHBDTN")
+        #expect(converter.flip("Ghbdtn", unknownScript: .latin) == "Привет")
+        #expect(converter.flip("ПРИВЕТ", unknownScript: .cyrillic) == "GHBDTN")
     }
 
     @Test func mapsPunctuationByKeyPosition() {
-        #expect(converter.convert(";'[]\\", to: .cyrillic) == "жэхъё")
-        #expect(converter.convert(",.&", to: .cyrillic) == "бю.")
-        #expect(converter.convert("жэхъё", to: .latin) == ";'[]\\")
-        #expect(converter.convert("бю.", to: .latin) == ",.&")
+        #expect(converter.flip(";'[]\\", unknownScript: .latin) == "жэхъё")
+        #expect(converter.flip(",.&", unknownScript: .latin) == "бю.")
+        #expect(converter.flip("жэхъё", unknownScript: .cyrillic) == ";'[]\\")
+        #expect(converter.flip("бю.", unknownScript: .cyrillic) == ",.&")
     }
 
     @Test func leavesUnmappedCharactersAlone() {
-        #expect(converter.convert("123/?\n🙂", to: .cyrillic) == "123/?\n🙂")
-        #expect(converter.convert("123/?\n🙂", to: .latin) == "123/?\n🙂")
+        #expect(converter.flip("123/?\n🙂", unknownScript: .latin) == "123/?\n🙂")
+        #expect(converter.flip("123/?\n🙂", unknownScript: .cyrillic) == "123/?\n🙂")
     }
 
     @Test func prefersUnshiftedKeyWhenCharacterExistsOnSeveralKeys() {
@@ -67,7 +67,7 @@ enum Fixtures {
         let latin = KeyboardLayout(id: "l", keys: [26: KeyCap(base: "7", shift: "&"), 44: KeyCap(base: "/", shift: "?")])
         let cyrillic = KeyboardLayout(id: "c", keys: [26: KeyCap(base: "7", shift: "."), 44: KeyCap(base: ".", shift: ",")])
         let converter = LayoutConverter(latin: latin, cyrillic: cyrillic)
-        #expect(converter.convert(".", to: .latin) == "/")
+        #expect(converter.flip(".", unknownScript: .cyrillic) == "/")
     }
 }
 

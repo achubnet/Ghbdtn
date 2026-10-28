@@ -52,9 +52,14 @@ you will have to grant it again after each build.
 swift test
 ```
 
-The pure logic — script detection, the layout map, the hotkey detector, the selection guess —
-lives in `LayoutCore` and is covered by tests. System glue (input sources, pasteboard, synthetic
-key events, Accessibility) is in `Sources/Ghbdtn`.
+`LayoutCore` holds everything that decides what happens — script detection, the layout map, the
+hotkey detector, the selection guess and the conversion flow itself (`SelectionConverter`). The
+flow talks to the system only through three protocols (`ClipboardTextIO`, `AccessibilityTextIO`,
+`LayoutSwitching`), so the tests run every scenario against a fake text field.
+
+`Sources/Ghbdtn` implements those protocols over the real system (pasteboard and synthetic key
+events, the Accessibility API, Text Input Sources) and wires them up with the input monitor,
+the menu and the login item.
 
 ## How it works
 
