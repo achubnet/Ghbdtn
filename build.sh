@@ -1,5 +1,7 @@
 #!/bin/bash
-# Builds Ghbdtn.app, signs it, and with --install copies it to /Applications and launches it.
+# Builds Ghbdtn.app and signs it.
+#   --install  also copies it to /Applications and launches it
+#   --dmg      also packs it into build/Ghbdtn-<version>.dmg for a GitHub release
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -23,10 +25,24 @@ IDENTITY="${CODESIGN_IDENTITY:-$(security find-identity -v -p codesigning | grep
 codesign --force --sign "${IDENTITY:--}" "$APP"
 echo "Built $APP (signed as ${IDENTITY:-ad-hoc})"
 
-if [[ "${1:-}" == "--install" ]]; then
+case "${1:-}" in
+--install)
     pkill -x Ghbdtn || true
     rm -rf /Applications/Ghbdtn.app
     cp -R "$APP" /Applications/
     open /Applications/Ghbdtn.app
     echo "Installed to /Applications and launched"
-fi
+    ;;
+--dmg)
+    VERSION="$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' Resources/Info.plist)"
+    DMG="build/Ghbdtn-$VERSION.dmg"
+    STAGING="$(mktemp -d)"
+    trap 'rm -rf "$STAGING"' EXIT
+    cp -R "$APP" "$STAGING/"
+    ln -s /Applications "$STAGING/Applications"
+    rm -f "$DMG"
+    hdiutil create -volname Ghbdtn -srcfolder "$STAGING" -format UDZO -quiet "$DMG"
+    codesign --force --sign "${IDENTITY:--}" "$DMG"
+    echo "Packed $DMG (sha256 $(shasum -a 256 "$DMG" | cut -d' ' -f1))"
+    ;;
+esac

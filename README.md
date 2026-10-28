@@ -4,8 +4,27 @@
 
 A tiny macOS menu bar app that fixes text typed in the wrong keyboard layout. Press **⌥⌘** and
 `ghbdtn rfr ltkf` becomes `привет как дела` — and the system layout switches so you can keep typing.
+A free, open-source alternative to Punto Switcher and Caramba Switcher for Mac (English ↔ Russian).
+
+<p align="center"><img src="docs/demo.gif" width="720" alt="Typing ghbdtn rfr ltkf, pressing Option+Command, getting привет как дела"></p>
 
 [Русский ниже ↓](#по-русски)
+
+## Install
+
+**Homebrew:**
+
+```bash
+brew install --cask skriptoff/tap/ghbdtn
+```
+
+**Or download** `Ghbdtn-<version>.dmg` from [Releases](https://github.com/skriptoff/Ghbdtn/releases/latest)
+and drag Ghbdtn to Applications.
+
+**First launch.** Ghbdtn is not notarized by Apple yet, so macOS blocks it the first time:
+open it once, then go to System Settings → Privacy & Security and click **Open Anyway**.
+After that, allow Ghbdtn in Privacy & Security → **Accessibility** — it needs this to see the
+hotkey and to copy and paste the text.
 
 ## Features
 
@@ -31,7 +50,7 @@ A tiny macOS menu bar app that fixes text typed in the wrong keyboard layout. Pr
 - Accessibility permission (System Settings → Privacy & Security → Accessibility) — needed to
   watch the hotkey and send ⌘C/⌘V
 
-## Build & install
+## Build from source
 
 ```bash
 git clone git@github.com:skriptoff/Ghbdtn.git
@@ -77,8 +96,9 @@ MIT
 
 ## По-русски
 
-Маленькое приложение для строки меню macOS: исправляет текст, набранный не в той раскладке.
-Нажали **⌥⌘** — `ghbdtn rfr ltkf` превращается в `привет как дела`, а раскладка переключается.
+Бесплатная альтернатива Punto Switcher для Mac с открытым кодом. Маленькое приложение для строки
+меню macOS исправляет текст, набранный не в той раскладке: нажали **⌥⌘** — `ghbdtn rfr ltkf`
+превращается в `привет как дела`, а раскладка переключается.
 
 - Короткое нажатие **⌥⌘** (без других клавиш) переводит выделенный текст, а без выделения —
   последнее слово перед курсором, включая символы: `nj;t` → `тоже`.
@@ -88,5 +108,9 @@ MIT
 - Таблица строится из включённых в системе раскладок, буфер обмена восстанавливается.
 - В простое не нагружает систему: 0% CPU, ~20 МБ.
 
-**Установка:** `./build.sh --install` (нужен Xcode), затем дайте доступ в
-«Настройки → Конфиденциальность и безопасность → Универсальный доступ».
+**Установка:** `brew install --cask skriptoff/tap/ghbdtn` или скачайте `.dmg` из
+[Releases](https://github.com/skriptoff/Ghbdtn/releases/latest) и перетащите Ghbdtn в «Программы».
+
+**Первый запуск.** Приложение пока не нотаризовано Apple, поэтому macOS в первый раз его
+заблокирует: откройте его, затем «Настройки → Конфиденциальность и безопасность» → **«Всё равно
+открыть»**. После этого разрешите Ghbdtn в разделе **«Универсальный доступ»** там же.
