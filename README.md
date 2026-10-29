@@ -15,12 +15,12 @@ A free, open-source alternative to Punto Switcher and Caramba Switcher for Mac (
 **Homebrew:**
 
 ```bash
-brew tap skriptoff/tap
-brew trust --cask skriptoff/tap/ghbdtn   # Homebrew 7+ asks to trust third-party casks
+brew tap achubnet/tap
+brew trust --cask achubnet/tap/ghbdtn   # Homebrew 7+ asks to trust third-party casks
 brew install --cask ghbdtn
 ```
 
-**Or download** `Ghbdtn-<version>.dmg` from [Releases](https://github.com/skriptoff/Ghbdtn/releases/latest)
+**Or download** `Ghbdtn-<version>.dmg` from [Releases](https://github.com/achubnet/Ghbdtn/releases/latest)
 and drag Ghbdtn to Applications.
 
 **First launch.** Ghbdtn is not notarized by Apple yet, so macOS blocks it the first time:
@@ -55,7 +55,7 @@ hotkey and to copy and paste the text.
 ## Build from source
 
 ```bash
-git clone git@github.com:skriptoff/Ghbdtn.git
+git clone git@github.com:achubnet/Ghbdtn.git
 cd Ghbdtn
 ./build.sh --install
 ```
@@ -111,7 +111,7 @@ MIT
 - В простое не нагружает систему: 0% CPU, ~20 МБ.
 
 **Установка:** через Homebrew (команды выше, в разделе Install) или скачайте `.dmg` из
-[Releases](https://github.com/skriptoff/Ghbdtn/releases/latest) и перетащите Ghbdtn в «Программы».
+[Releases](https://github.com/achubnet/Ghbdtn/releases/latest) и перетащите Ghbdtn в «Программы».
 
 **Первый запуск.** Приложение пока не нотаризовано Apple, поэтому macOS в первый раз его
 заблокирует: откройте его, затем «Настройки → Конфиденциальность и безопасность» → **«Всё равно
